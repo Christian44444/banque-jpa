@@ -20,7 +20,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "CLIENT")
-public class Client extends Compte {
+public class Client {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,8 +46,8 @@ public class Client extends Compte {
 	
 	@ManyToMany
 	@JoinTable(name = "COMPTE_CLIENT", 
-	   joinColumns = @JoinColumn(name = "ID_COMPTE", referencedColumnName = "ID" ),
-	   inverseJoinColumns = @JoinColumn(name = "ID_CLIENT", referencedColumnName = "ID"))
+	   joinColumns = @JoinColumn(name = "ID_CLIENT", referencedColumnName = "ID" ),
+	   inverseJoinColumns = @JoinColumn(name = "ID_COMPTE", referencedColumnName = "ID"))
 	private List<Compte> comptes = new ArrayList<Compte>();
 
 	/**

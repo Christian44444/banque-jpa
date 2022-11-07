@@ -13,6 +13,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -25,7 +26,7 @@ import javax.persistence.Table;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "COMPTE")
-public abstract class Compte {
+public class Compte {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID", length = 11, nullable = false)
@@ -42,6 +43,10 @@ public abstract class Compte {
 	   joinColumns = @JoinColumn(name = "ID_COMPTE", referencedColumnName = "ID" ),
 	   inverseJoinColumns = @JoinColumn(name = "ID_CLIENT", referencedColumnName = "ID"))
 	private List<Client> clients = new ArrayList<Client>();
+	
+	@OneToMany(mappedBy = "compte")
+	private List<Operation> operations = new ArrayList<Operation>();
+
 	
 	/**
 	 * Constructeur par défaut
@@ -104,5 +109,13 @@ public abstract class Compte {
 	public List<Client> getClients() {
 		return clients;
 	}
+
+	/**
+	 * @return the operations
+	 */
+	public List<Operation> getOperations() {
+		return operations;
+	}
+	
 	
 }
